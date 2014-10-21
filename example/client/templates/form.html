@@ -1,0 +1,33 @@
+<template name="form">
+  <div class="row">
+    <div class="col-md-4">
+      <form role="form">
+        <div class="form-group">
+          <label class="control-label" for="value">Value</label>
+          <div class="input-group">
+            <span class="input-group-addon">&pound;</span>
+            <input class="form-control" id="value">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-8">
+      <table class="table table-bordered">
+        <caption>Nodes</caption>
+        <thead>
+          <tr>
+            <th class="fds-name">Name</th>
+            <th class="fds-set">Set</th>
+            <th class="fds-value">Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each nodes}}
+            {{> nodeTableRow}}
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</template>
+

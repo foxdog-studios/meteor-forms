@@ -1,0 +1,35 @@
+{
+  "dependencies": [
+    [
+      "coffeescript",
+      "1.0.4"
+    ],
+    [
+      "fds:jison-base",
+      "0.0.0"
+    ],
+    [
+      "fds:jison-build",
+      "0.0.0"
+    ],
+    [
+      "meteor",
+      "1.1.2"
+    ],
+    [
+      "reactive-var",
+      "1.0.3"
+    ],
+    [
+      "tracker",
+      "1.0.3"
+    ],
+    [
+      "underscore",
+      "1.0.1"
+    ]
+  ],
+  "pluginDependencies": [],
+  "toolVersion": "meteor-tool@1.0.34",
+  "format": "1.0"
+}
