@@ -21,9 +21,9 @@ Package.onUse(function(api) {
   );
   api.addFiles(
     [
-      'client/lib/decimal.jison',
+      'client/lib/currency.jison',
       'client/lib/export.js',
-        'client/lib/decimal_string.coffee',
+        'client/lib/currency_string.coffee',
         'client/lib/node.coffee',
         'client/lib/node_computer.coffee',
         'client/lib/node_computation.coffee',

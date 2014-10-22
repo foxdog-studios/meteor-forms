@@ -14,36 +14,29 @@ class CleanStringComputation extends Forms.NodeComputation
     values.string.trim()
 
 
-class DecimalStringComputation extends Forms.NodeComputation
+class CurrencyStringComputation extends Forms.NodeComputation
   checkArgs: (node, values, unset) ->
     _.isString values.string
 
   compute: (node, values, unset) ->
-    try
-      Forms.DecimalString.fromString values.string
-    catch
+    Forms.CurrencyString.fromString values.string
 
 
 class PenceComputation extends Forms.NodeComputation
-  checkArgs: (node, values, unset) ->
-    values.decimal?.fraction.length <= 2
-
   compute: (node, values, unset) ->
-    decimal = values.decimal
-    pounds = @_makePounds decimal.integer
-    pence = @_makePence decimal.fraction
+    currency = values.currency
+    pounds = @_makePounds currency.pounds
+    pence = @_makePence currency.pence
     total = pounds + pence
-    if decimal.sign == '-'
+    if currency.sign == '-'
       total = -total
     total
 
-  _makePounds: (integer) ->
-    100 * parseInt integer, 10
+  _makePounds: (pounds) ->
+    100 * parseInt pounds, 10
 
-  _makePence: (fraction) ->
-    while fraction.length < 2
-      fraction += '0'
-    parseInt fraction, 10
+  _makePence: (pence) ->
+    parseInt pence, 10
 
 
 class FormBehaviour extends FDS.Behaviour
@@ -51,19 +44,19 @@ class FormBehaviour extends FDS.Behaviour
     @_raw = makeRawNode()
     @_string = makeStringNode @_raw.node
     @_clean = makeCleanNode @_string.node
-    @_decimal = makeDecimalStringNode @_clean.node
-    @_pence = makePenceNode @_decimal.node
+    @_currency = makeCurrencyStringNode @_clean.node
+    @_pence = makePenceNode @_currency.node
 
   getNodes: -> [
     @_raw
     @_string
     @_clean
-    @_decimal
+    @_currency
     @_pence
   ]
 
   onInputBur: (event, instance) ->
-    node = if @_decimal.node.isSet() then @_decimal else @_clean
+    node = if @_currency.node.isSet() then @_currency else @_clean
     event.target.value = node.node.get()
 
   onValueChange: (event, instance) ->
@@ -111,17 +104,17 @@ makeCleanNode = (stringNode) ->
   comp: comp
 
 
-makeDecimalStringNode = (stringNode) ->
+makeCurrencyStringNode = (stringNode) ->
   node = Forms.Node inputs: string: stringNode
-  comp = Forms.NodeComputer node, DecimalStringComputation
+  comp = Forms.NodeComputer node, CurrencyStringComputation
   comp.start()
-  name: 'Decimal'
+  name: 'Currency'
   node: node
   comp: comp
 
 
-makePenceNode = (decimalNode) ->
-  node = Forms.Node inputs: decimal: decimalNode
+makePenceNode = (currencyNode) ->
+  node = Forms.Node inputs: currency: currencyNode
   comp = Forms.NodeComputer node, PenceComputation
   comp.start()
   name: 'Pence'

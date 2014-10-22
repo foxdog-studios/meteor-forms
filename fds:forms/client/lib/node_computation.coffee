@@ -5,7 +5,7 @@ class Forms.NodeComputation
   onAfterInputChange: (node) ->
 
   checkArgs: (node, values, unset) ->
-    true
+    _.isEmpty unset
 
   compute: (node, values, unset) ->
     values
