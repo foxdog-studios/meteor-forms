@@ -1,9 +1,7 @@
 'use strict'
 
-
 Forms.NodeComputer = (node, nodeComputationClass) ->
   new NodeComputer node, nodeComputationClass
-
 
 class NodeComputer
   constructor: (@_node, @_nodeComputationClass) ->
@@ -29,7 +27,7 @@ class NodeComputer
       result = comp.compute @_node, values, unset
       canContinue = comp.checkResult @_node, result
       if canContinue
-        comp.onAfterCompute @_node, result
+        comp.setResult @_node, result
     comp.onAbort @_node unless canContinue
 
   _makeComputeArgs: =>

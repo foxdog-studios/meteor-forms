@@ -1,7 +1,7 @@
 Template.nodeTableRow.helpers
   isSet: ->
-    if @node.isSet() then 'Yes' else 'No'
+    if @isSet() then 'Yes' else 'No'
 
   value: ->
-    @node.get()
+    @get()
 

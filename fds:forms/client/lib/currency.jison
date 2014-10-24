@@ -86,64 +86,40 @@ amount
 
 stripped_pounds
   : pounds
-  | leading_zeros
-  | leading_zeros pounds
+  | leading_crufts
+    { $$ = "0"; }
+  | leading_crufts pounds
     { $$ = $2; }
   ;
 
-leading_zeros
+leading_crufts
   : ZERO
-  | ZERO leading_zeros
+  | ZERO crufts
   ;
 
 pounds
-  : pounds_1
-  ;
-
-pounds_1
   : NONEZERO
-  | NONEZERO pounds_tail_groups
-    { $$ = $1 + $2; }
-  | NONEZERO pounds_2
+  | NONEZERO pounds_tail
     { $$ = $1 + $2; }
   ;
 
-pounds_2
-  : numeral
-  | numeral pounds_tail_groups
-    { $$ = $1 + $2; }
-  | numeral pounds_3
+pounds_tail
+  : pound
+  | pound pounds_tail
     { $$ = $1 + $2; }
   ;
 
-pounds_3
-  : numeral
-  | numeral pounds_tail_groups
-    { $$ = $1 + $2; }
-  | numeral pounds_tail_numerals
-    { $$ = $1 + $2; }
-  ;
-
-pounds_tail_groups
-  : pounds_tail_group
-  | pounds_tail_group pounds_tail_groups
-    { $$ = $1 + $2; }
-  ;
-
-pounds_tail_group
-  : SEP three_numerals
-    { $$ = $2; }
-  ;
-
-pounds_tail_numerals
-  : numeral
-  | numeral pounds_tail_numerals
-    { $$ = $1 + $2; }
+pound
+  : SEP
+    { $$ = ""; }
+  | numeral
   ;
 
 
 point_pence
-  : POINT pence_1
+  : POINT
+    { $$ = ""; }
+  | POINT pence_1
     { $$ = $2; }
   ;
 
@@ -155,21 +131,27 @@ pence_1
 
 pence_2
   : numeral
-  | numeral trailing_zeros
+  | numeral zeros
   ;
 
-trailing_zeros
-  : ZERO
-  | ZERO trailing_zeros
+crufts
+  : cruft
+  | cruft crufts
   ;
 
-three_numerals
-  : numeral numeral numeral
-    { $$ = $1 + $2 + $3; }
+cruft
+  : SEP
+  | ZERO
   ;
+
 
 numeral
   : ZERO
   | NONEZERO
+  ;
+
+zeros
+  : ZERO
+  | ZERO zeros
   ;
 

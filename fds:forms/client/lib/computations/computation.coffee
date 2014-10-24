@@ -1,7 +1,6 @@
 'use strict'
 
-
-class Forms.NodeComputation
+class Pkg.Computation
   onAfterInputChange: (node) ->
 
   checkArgs: (node, values, unset) ->
@@ -13,7 +12,7 @@ class Forms.NodeComputation
   checkResult: (node, result) ->
     result?
 
-  onAfterCompute: (node, result) ->
+  setResult: (node, result) ->
     node.set result
 
   onAbort: (node) ->

@@ -14,7 +14,7 @@ ddp@1.0.10
 deps@1.0.5
 ejson@1.0.4
 fastclick@1.0.1
-fds:behaviours@1.0.0
+fds:behaviours@1.1.0
 fds:forms@0.0.0
 fds:jison-base@0.0.0
 fds:jison-build@0.0.0

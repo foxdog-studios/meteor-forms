@@ -23,10 +23,18 @@ Package.onUse(function(api) {
     [
       'client/lib/currency.jison',
       'client/lib/export.js',
+        'client/lib/computations/computation.coffee',
+          'client/lib/computations/clean_string_computation.coffee',
+          'client/lib/computations/currency_string_computation.coffee',
+          'client/lib/computations/pence_computation.coffee',
+          'client/lib/computations/string_computation.coffee',
+        'client/lib/computation_node.coffee',
         'client/lib/currency_string.coffee',
+        'client/lib/integer_utils.coffee',
         'client/lib/node.coffee',
+        'client/lib/currency_graph.coffee',
         'client/lib/node_computer.coffee',
-        'client/lib/node_computation.coffee',
+        'client/lib/null_node_computer.coffee',
     ],
     'client'
   );
@@ -37,5 +45,6 @@ Package.onTest(function(api) {
   api.use('tinytest');
   api.use('coffeescript');
   api.use('fds:forms');
+  api.addFiles('test.coffee', 'client');
 });
 
